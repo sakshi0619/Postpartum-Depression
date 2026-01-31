@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>PPD Screening - EPDS Questionnaire</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .warning { background-color: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        .submit-btn { 
+            background-color: #3498db; 
+            color: white; 
+            padding: 12px 30px; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            width: 100%;
+            margin-top: 20px;
+        }
+        .submit-btn:hover { background-color: #2980b9; }
+        .question { 
+            margin: 25px 0; 
+            padding: 20px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            background: #f9f9f9; 
+            transition: all 0.3s ease;
+        }
+        .question:hover { border-color: #3498db; }
+        .question h3 { color: #2c3e50; margin-top: 0; }
+        .instructions { background: #e8f4fc; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        .option-group { margin: 8px 0; padding: 10px; border-radius: 5px; }
+        .option-group:hover { background: #edf7ff; }
+        .required-star { color: red; }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #3498db;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        .score-display {
+            display: none;
+            background: #e8f4fc;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+    
+    <h1>📋 Edinburgh Postnatal Depression Scale (EPDS)</h1>
+    
+    <div class="instructions">
+        <h3>📝 Instructions:</h3>
+        <p>Please check <span class="required-star">*</span> the answer that comes closest to how you have felt <strong>IN THE PAST 7 DAYS</strong>.</p>
+        <p><em>Note: This is a screening tool, not a diagnosis. Always consult a healthcare professional.</em></p>
+    </div>
+    
+    <form method="POST" action="{{ url_for('submit_screening') }}" id="epdsForm">
+        {% for q_num in range(1, 11) %}
+            <div class="question" id="question-{{ q_num }}">
+                <h3>Question {{ q_num }}: {{ epds_questions[q_num]['text'] }}</h3>
+                {% for option in epds_questions[q_num]['options'] %}
+                    <div class="option-group">
+                        <input type="radio" 
+                               name="q{{ q_num }}" 
+                               value="{{ option['value'] }}" 
+                               id="q{{ q_num }}_{{ option['value'] }}"
+                               class="epds-option"
+                               data-question="{{ q_num }}"
+                               required>
+                        <label for="q{{ q_num }}_{{ option['value'] }}">{{ option['text'] }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        
+        <div class="warning" id="warningBox">
+            <h3>⚠️ Important Note:</h3>
+            <p>If you have thoughts of harming yourself (Question 10), please select anything except "Never" to receive immediate crisis support resources.</p>
+        </div>
+        
+        <div class="score-display" id="scoreDisplay">
+            <h3>📊 Current Score: <span id="currentScore">0</span>/30</h3>
+            <p id="scoreMessage"></p>
+        </div>
+        
+        <button type="submit" class="submit-btn">📊 Calculate Score & Get Results</button>
+    </form>
+    
+    <div style="margin-top: 30px; color: #666; font-size: 14px;">
+        <p><strong>Reference:</strong> Cox, J.L., Holden, J.M., & Sagovsky, R. (1987). Detection of postnatal depression: Development of the 10-item Edinburgh Postnatal Depression Scale. <em>British Journal of Psychiatry</em>, 150, 782-786.</p>
+    </div>
+
+    <script>
+        let totalScore = 0;
+        const answeredQuestions = new Set();
+        
+        // Update progress bar and score
+        function updateProgress() {
+            const progress = (answeredQuestions.size / 10) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            // Show score display after first question
+            if (answeredQuestions.size > 0) {
+                document.getElementById('scoreDisplay').style.display = 'block';
+                document.getElementById('currentScore').textContent = totalScore;
+                
+                let message = '';
+                if (totalScore < 10) {
+                    message = "Your score suggests minimal symptoms.";
+                } else if (totalScore < 13) {
+                    message = "Your score suggests possible depression.";
+                } else {
+                    message = "Your score suggests significant symptoms. Please discuss with a healthcare provider.";
+                }
+                document.getElementById('scoreMessage').textContent = message;
+            }
+        }
+        
+        // Calculate total score
+        function calculateScore() {
+            totalScore = 0;
+            const formData = new FormData(document.getElementById('epdsForm'));
+            for (let [key, value] of formData.entries()) {
+                if (key.startsWith('q')) {
+                    totalScore += parseInt(value);
+                }
+            }
+        }
+        
+        // Add event listeners to radio buttons
+        document.querySelectorAll('.epds-option').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const questionNum = this.getAttribute('data-question');
+                answeredQuestions.add(questionNum);
+                calculateScore();
+                updateProgress();
+                
+                // Highlight Q10 if score > 0
+                const q10Radios = document.querySelectorAll('input[name="q10"]:checked');
+                if (q10Radios.length > 0 && parseInt(q10Radios[0].value) > 0) {
+                    document.getElementById('question-10').style.borderColor = '#e74c3c';
+                    document.getElementById('warningBox').style.display = 'block';
+                }
+            });
+        });
+        
+        // Form validation
+        document.getElementById('epdsForm').addEventListener('submit', function(e) {
+            let allAnswered = true;
+            for (let i = 1; i <= 10; i++) {
+                if (!document.querySelector(`input[name="q${i}"]:checked`)) {
+                    allAnswered = false;
+                    document.getElementById(`question-${i}`).style.borderColor = '#e74c3c';
+                }
+            }
+            
+            if (!allAnswered) {
+                e.preventDefault();
+                alert('Please answer all questions before submitting.');
+            }
+        });
+
+        // === ADD THIS DEBUG SECTION ===
+        console.log("EPDS Form loaded successfully!");
+        
+        // Debug: Check if elements exist
+        console.log("Form element:", document.getElementById('epdsForm'));
+        console.log("Progress bar:", document.getElementById('progressFill'));
+        console.log("Score display:", document.getElementById('scoreDisplay'));
+        console.log("Current score span:", document.getElementById('currentScore'));
+        
+        // Debug: Count radio buttons
+        const radioButtons = document.querySelectorAll('.epds-option');
+        console.log("Total radio buttons found:", radioButtons.length);
+        
+        // Test: Add a test button to manually check score calculation
+        const testButton = document.createElement('button');
+        testButton.textContent = "🛠️ Test Score Calculation";
+        testButton.style.cssText = "background: #ff6b6b; color: white; padding: 10px; margin: 10px 0; border: none; border-radius: 5px; cursor: pointer;";
+        testButton.onclick = function() {
+            calculateScore();
+            console.log("Manual test - Total score:", totalScore);
+            alert("Test score: " + totalScore);
+        };
+        document.querySelector('.instructions').appendChild(testButton);
+        // === END DEBUG SECTION ===
+        
+        // Initialize progress
+        updateProgress();
+    </script>
+</body>
+</html>

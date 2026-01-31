@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+
+{% block title %}Analyze Text{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h2 class="mb-4">Analyze Text Sentiment</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="text" class="form-label">Enter your text:</label>
+                <textarea class="form-control" id="text" name="text" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Analyze</button>
+        </form>
+    </div>
+</div>
+
+<!-- Book Recommendations Section -->
+<div class="row mt-5">
+    <div class="col-12">
+        <h3 class="mb-4">Recommended Books for Postpartum Support</h3>
+        <p class="mb-4">Reading can be a wonderful escape and source of comfort during the postpartum period.</p>
+        
+        <style>
+            .book-card {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                border: none;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            .book-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .book-cover {
+                height: 220px;
+                background: #f8f9fa;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: -1rem -1rem 1rem -1rem;
+                overflow: hidden;
+                position: relative;
+            }
+            .book-cover img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .book-icon {
+                color: #8a4fff;
+                font-size: 3.5rem;
+                opacity: 0.8;
+            }
+            .read-options {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                margin-top: 15px;
+            }
+            .read-now-btn {
+                background: linear-gradient(135deg, #6a89cc 0%, #4a69bd 100%);
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-weight: 500;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 0.9rem;
+            }
+            .read-now-btn:hover {
+                background: linear-gradient(135deg, #4a69bd 0%, #1e3799 100%);
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(74, 105, 189, 0.4);
+            }
+            .article-btn {
+                background: linear-gradient(135deg, #ff7675 0%, #fd79a8 100%);
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-weight: 500;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 0.9rem;
+            }
+            .article-btn:hover {
+                background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(253, 121, 168, 0.4);
+            }
+        </style>
+        
+        <div class="row">
+            <!-- Book 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1549056572-75914d6d7e1a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="Mother and baby bonding" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-baby book-icon\"></i>';">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">The First Forty Days</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">by Heng Ou</h6>
+                        <p class="card-text">A guide to nourishing new mothers with recipes and wisdom for the postpartum period.</p>
+                        <div class="read-options">
+                            <a href="https://www.amazon.com/First-Forty-Days-Essential-Nourishing/dp/1617691836" target="_blank" class="read-now-btn">Get Book</a>
+                            <a href="https://www.postpartum.net/professionals/legislation-toolkit/what-is-postpartum/" target="_blank" class="article-btn">Postpartum Article</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Book 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1534367507877-0edd93bd013b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80" alt="Mother holding newborn" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-baby book-icon\"></i>';">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Good Moms Have Scary Thoughts</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">by Karen Kleiman</h6>
+                        <p class="card-text">A reassuring guide for mothers experiencing intrusive thoughts.</p>
+                        <div class="read-options">
+                            <a href="https://www.amazon.com/Good-Moms-Have-Scary-Thoughts/dp/1732381902" target="_blank" class="read-now-btn">Get Book</a>
+                            <a href="https://www.healthline.com/health/parenting/intrusive-thoughts-postpartum" target="_blank" class="article-btn">Intrusive Thoughts</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Book 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1542995470-870e12e7e14f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Mother reading to baby" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-baby book-icon\"></i>';">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">The Happy Mama Handbook</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">by Amy Ransom</h6>
+                        <p class="card-text">Practical advice for enjoying motherhood despite the challenges.</p>
+                        <div class="read-options">
+                            <a href="https://www.amazon.com/Happy-Mama-Handbook-surviving-thriving/dp/1910336421" target="_blank" class="read-now-btn">Get Book</a>
+                            <a href="https://www.verywellfamily.com/how-to-enjoy-motherhood-more-4842373" target="_blank" class="article-btn">Enjoying Motherhood</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Book 4 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80" alt="Mother and baby resting" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-baby book-icon\"></i>';">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">This Isn't What I Expected</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">by Karen Kleiman</h6>
+                        <p class="card-text">A comprehensive guide to overcoming postpartum depression.</p>
+                        <div class="read-options">
+                            <a href="https://www.amazon.com/This-Isnt-What-Expected-Depression/dp/0553378250" target="_blank" class="read-now-btn">Get Book</a>
+                            <a href="https://www.mayoclinic.org/diseases-conditions/postpartum-depression/diagnosis-treatment/drc-20376623" target="_blank" class="article-btn">PPD Treatment</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Book 5 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1549063354-6c17c43d4d8c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="Mother comforting baby" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-baby book-icon\"></i>';">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Down Came the Rain</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">by Brooke Shields</h6>
+                        <p class="card-text">A memoir about Brooke's own experience with postpartum depression.</p>
+                        <div class="read-options">
+                            <a href="https://www.amazon.com/Down-Came-Rain-Postpartum-Depression/dp/1401301775" target="_blank" class="read-now-btn">Get Book</a>
+                            <a href="https://www.webmd.com/depression/postpartum-depression/understanding-postpartum-depression-basics" target="_blank" class="article-btn">PPD Basics</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Book 6 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 book-card">
+                    <div class="book-cover">
+                        <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Family with newborn" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-baby book-icon\"></i>';">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">The Postpartum Husband</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">by Karen Kleiman</h6>
+                        <p class="card-text">Practical solutions for living with postpartum depression as a couple.</p>
+                        <div class="read-options">
+                            <a href="https://www.amazon.com/Postpartum-Husband-Practical-Solutions-Postpartum/dp/1555613676" target="_blank" class="read-now-btn">Get Book</a>
+                            <a href="https://www.helpguide.org/articles/depression/postpartum-depression-and-the-baby-blues.htm" target="_blank" class="article-btn">Partner Support</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

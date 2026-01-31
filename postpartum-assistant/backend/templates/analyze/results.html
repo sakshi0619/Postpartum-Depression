@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <!-- Main Results Card -->
+            <div class="card mb-4 shadow">
+                <div class="card-body text-center">
+                    <h2 class="card-title mb-4">Your Mental Health Analysis</h2>
+                    
+                    <!-- Sentiment Display -->
+                    <div class="sentiment-display mb-4">
+                        <div class="sentiment-badge 
+                            {% if results.sentiment == 'positive' %}bg-success  {# CHANGED FROM POSITIVE #}
+                            {% elif results.sentiment == 'negative' %}bg-danger  {# CHANGED FROM NEGATIVE #}
+                            {% else %}bg-warning{% endif %}">
+                            {{ results.sentiment }}
+                        </div>
+                        <div class="confidence-badge bg-light text-dark">
+                            {{ (results.confidence * 100)|round(1) }}% confidence
+                        </div>
+                    </div>
+
+                    <!-- Emergency Contact Section (Only for Negative) -->
+                    {% if results.sentiment == 'negative' %}  {# CHANGED FROM NEGATIVE #}
+                    <div class="card border-danger mb-4 shadow">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0"><i class="bi bi-heart-pulse-fill"></i> Immediate Support Available</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-danger">
+                                <i class="bi bi-exclamation-triangle-fill"></i> 
+                                Based on your input, we recommend reaching out for support:
+                            </div>
+                            
+                            <div class="list-group">
+                                <div class="list-group-item">
+                                    <h6>National Suicide Prevention Lifeline</h6>
+                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                        <span class="text-muted">1-800-273-8255</span>
+                                        <a href="tel:18002738255" class="btn btn-sm btn-danger">
+                                            <i class="bi bi-telephone"></i> Call Now
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <h6>Postpartum Support International</h6>
+                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                        <span class="text-muted">1-800-944-4773</span>
+                                        <a href="tel:18009444773" class="btn btn-sm btn-danger">
+                                            <i class="bi bi-telephone"></i> Call Now
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <h6>Crisis Text Line</h6>
+                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                        <span class="text-muted">Text HOME to 741741</span>
+                                        <a href="sms:741741" class="btn btn-sm btn-danger">
+                                            <i class="bi bi-chat-text"></i> Text Now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Navigation Buttons -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-between mt-4">
+                        <a href="{{ url_for('history') }}" class="btn btn-outline-secondary">
+                            <i class="bi bi-clock-history"></i> View History
+                        </a>
+                        <a href="{{ url_for('analyze_form') }}" class="btn btn-primary">
+                            <i class="bi bi-arrow-repeat"></i> New Analysis
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.sentiment-display {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+}
+
+.sentiment-badge {
+    font-size: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.confidence-badge {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+.input-summary {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    padding: 1.25rem;
+}
+</style>
+{% endblock %}

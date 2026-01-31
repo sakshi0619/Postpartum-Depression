@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Contacts - Maternal Wellness Resources</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #5e72e4;
+            --secondary-color: #8392ab;
+            --accent-color: #11cdef;
+            --light-color: #f8f9fa;
+            --dark-color: #344767;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark-color);
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resource-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6a11cb 100%);
+            color: white;
+            padding: 15px 20px;
+        }
+        
+        .contact-item {
+            padding: 15px;
+            border-radius: 10px;
+            background-color: white;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .btn-emergency {
+            background: linear-gradient(to right, #e74a3b, #f6c23e);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-emergency:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(231, 74, 59, 0.3);
+        }
+        
+        .urgent-contact {
+            border-left: 4px solid #e74a3b;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 74, 59, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(231, 74, 59, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 74, 59, 0); }
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-heart-pulse-fill me-2"></i>Maternal Wellness Guide
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-house-door me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-journal-bookmark me-1"></i> Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="bi bi-telephone me-1"></i> Emergency Contacts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-person-circle me-1"></i> My Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1 class="mb-4"><i class="bi bi-telephone me-2"></i>Emergency Contacts</h1>
+        <p class="lead mb-5">Immediate help is available. Don't hesitate to reach out if you're struggling.</p>
+        
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading"><i class="bi bi-exclamation-triangle-fill"></i> In case of emergency, call 911 immediately</h4>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="resource-card card shadow">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="bi bi-heartbreak me-2"></i>Urgent Mental Health Support</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-item urgent-contact">
+                            <h5>National Suicide Prevention Lifeline</h5>
+                            <p class="fs-4"><i class="bi bi-telephone-fill me-2"></i>988</p>
+                            <p>24/7 free and confidential support for people in distress</p>
+                            <button class="btn btn-emergency">Call Now</button>
+                        </div>
+                        
+                        <div class="contact-item urgent-contact">
+                            <h5>Crisis Text Line</h5>
+                            <p class="fs-4"><i class="bi bi-chat-dots-fill me-2"></i>Text HOME to 741741</p>
+                            <p>Free 24/7 support at your fingertips</p>
+                            <button class="btn btn-emergency">Text Now</button>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h5>Postpartum Support International</h5>
+                            <p class="fs-5"><i class="bi bi-telephone-fill me-2"></i>1-800-944-4773</p>
+                            <p>Free, confidential support for postpartum depression and anxiety</p>
+                            <button class="btn btn-primary">Call Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card card shadow mt-4">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="bi bi-building me-2"></i>Local Resources</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-item">
+                            <h5>Community Mental Health Center</h5>
+                            <p class="fs-5"><i class="bi bi-telephone-fill me-2"></i>(555) 123-4567</p>
+                            <p>123 Wellness Street, Your City</p>
+                            <p>Sliding scale fees available</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h5>Women's Health Clinic</h5>
+                            <p class="fs-5"><i class="bi bi-telephone-fill me-2"></i>(555) 987-6543</p>
+                            <p>456 Care Avenue, Your City</p>
+                            <p>Specialized postpartum care</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="resource-card card shadow">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="bi bi-ambulance me-2"></i>Medical Emergencies</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-item">
+                            <h5>Emergency Medical Services</h5>
+                            <p class="fs-4"><i class="bi bi-telephone-fill me-2"></i>911</p>
+                            <p>For life-threatening emergencies</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h5>Poison Control</h5>
+                            <p class="fs-4"><i class="bi bi-telephone-fill me-2"></i>1-800-222-1222</p>
+                            <p>24/7 help for poison emergencies</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h5>Local Hospital Emergency Room</h5>
+                            <p class="fs-5"><i class="bi bi-telephone-fill me-2"></i>(555) 789-0123</p>
+                            <p>789 Health Boulevard, Your City</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card card shadow mt-4">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="bi bi-info-circle me-2"></i>When to Seek Help</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Contact a healthcare provider immediately if you experience:</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Thoughts of harming yourself or your baby</li>
+                            <li class="list-group-item">Severe anxiety or panic attacks</li>
+                            <li class="list-group-item">Inability to sleep even when baby is sleeping</li>
+                            <li class="list-group-item">Feelings of hopelessness or despair</li>
+                            <li class="list-group-item">Loss of interest in activities you used to enjoy</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="resource-card card shadow mt-4">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="bi bi-download me-2"></i>Emergency Plan</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Create your postpartum emergency plan:</p>
+                        <ol>
+                            <li>Identify trusted people to call</li>
+                            <li>Save important numbers in your phone</li>
+                            <li>Share your plan with your support system</li>
+                            <li>Know the nearest emergency facilities</li>
+                        </ol>
+                        <button class="btn btn-primary">Download Emergency Plan Template</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer text-center mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Maternal Wellness Guide</h5>
+                    <p>Supporting parents through the postpartum journey</p>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">Resources</a></li>
+                        <li><a href="#" class="text-white">Emergency Contacts</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Get Help Now</h5>
+                    <p>Call our 24/7 support line: 1-800-123-4567</p>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.2);">
+            <p class="mb-0">© 2023 Maternal Wellness Guide. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

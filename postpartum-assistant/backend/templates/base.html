@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Postpartum Support Assistant{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+     <!-- Add this below your Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        /* Quick inline styles to preserve existing spacing */
+        .flash-message { margin-top: 20px; }
+        
+        /* Navbar tweaks for new design */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-weight: 600;
+            color: var(--secondary-blue) !important;
+        }
+        
+        /* Hero section with mother and baby */
+        .hero-section {
+            height: 500px;
+            background-size: cover;
+            background-position: center 30%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .hero-text {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+        /* Overlay for better text readability */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(146, 100, 166, 0.4), rgba(83, 52, 131, 0.6));
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-cream">
+    <!-- Hero Section with Mother and Baby -->
+    <header class="hero-section" 
+            style="background-image: url('https://media.istockphoto.com/id/1322241294/photo/mother-holding-her-baby-boy-in-the-nursery-room.jpg?s=2048x2048&w=is&k=20&c=tjYhcn-ZDr4kbRH1CvnY0bcuwz_HeHbjtprIUr8l2Kk=');">
+        {% block hero %}
+        <div class="hero-text text-white text-center">
+            <h1 class="display-4 fw-bold">{% block hero_title %}Postpartum Support{% endblock %}</h1>
+            <p class="lead">{% block hero_subtitle %}Gentle mental health monitoring for new mothers{% endblock %}</p>
+            <a href="#features" class="btn btn-lavender btn-lg mt-3">Get Support</a>
+        </div>
+        {% endblock %}
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                <i class="bi bi-heart-pulse"></i> PPD Assistant
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    {% if current_user.is_authenticated %}
+                        <a class="nav-link" href="{{ url_for('analyze_form') }}">
+                            <i class="bi bi-clipboard-pulse"></i> Analyze
+                        </a>
+                        <a class="nav-link" href="{{ url_for('history') }}">
+                            <i class="bi bi-clock-history"></i> History
+                        </a>
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">
+                            <i class="bi bi-speedometer2"></i> Dashboard
+                        </a>
+                        <li class="nav-item">
+
+                        <!-- Add this line to your navigation menu -->
+                    <li class="nav-item">
+                 <a class="nav-link" href="{{ url_for('ppd_screening') }}">
+                   <i class="fas fa-clipboard-check"></i> PPD Screening
+                  </a>
+                    </li>    
+   
+                        <a class="nav-link" href="{{ url_for('logout') }}">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </a>
+                        <span class="nav-link text-dark fw-medium">
+                            <i class="bi bi-person-circle"></i> {{ current_user.username }}
+                        </span>
+                    {% else %}
+                        <a class="nav-link" href="{{ url_for('login') }}">
+                            <i class="bi bi-box-arrow-in-right"></i> Login
+                        </a>
+                        <a class="nav-link" href="{{ url_for('register') }}">
+                            <i class="bi bi-person-plus"></i> Register
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container py-4">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} flash-message alert-dismissible fade show">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Floating Encouragement -->
+    <div class="floating-message">
+        <span>💖 Your feelings are valid</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-lavender text-white text-center py-3 mt-5">
+        <div class="container">
+            <p class="mb-0">Postpartum Support Assistant &copy; 2025</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

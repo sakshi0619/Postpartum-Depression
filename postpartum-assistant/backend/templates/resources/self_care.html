@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maternal Wellness Resources</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #8a6bc9;
+            --secondary-color: #5dbecd;
+            --accent-color: #ff7aa8;
+            --light-color: #f8f5fe;
+            --dark-color: #2d2856;
+        }
+        
+        body {
+            background-color: #f9f7ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark-color);
+            padding-bottom: 50px;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6a48d7 100%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resource-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            background: white;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 14px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6a48d7 100%);
+            color: white;
+            padding: 18px 25px;
+            border-bottom: 0;
+        }
+        
+        .practice-item, .mental-health-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed #e9e1ff;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .practice-item:last-child, .mental-health-item:last-child {
+            border-bottom: none;
+        }
+        
+        .section-icon {
+            font-size: 1.6rem;
+            margin-right: 15px;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+        
+        .resources-sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 20px;
+        }
+        
+        .resources-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .resources-list li {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .resources-list li.active {
+            background: var(--light-color);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .resources-list li:not(.active):hover {
+            background: #f0ebff;
+            cursor: pointer;
+        }
+        
+        .resources-list i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6a48d7 100%);
+            color: white;
+            padding: 25px 0;
+            margin-top: 40px;
+        }
+        
+        .btn-resource {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-resource:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(106, 72, 215, 0.3);
+            color: white;
+        }
+        
+        .alert-custom {
+            background-color: #f8f5fe;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .page-title {
+            color: var(--dark-color);
+            font-weight: 700;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .resources-sidebar {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-heart-pulse-fill me-2"></i>Maternal Wellness Guide
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-house-door me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="bi bi-journal-bookmark me-1"></i> Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-chat-dots me-1"></i> Community</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-person-circle me-1"></i> My Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1 class="page-title">Maternal Wellness Resources</h1>
+        
+        <div class="row">
+            <!-- Sidebar with resource links -->
+            <div class="col-lg-4">
+                <div class="resources-sidebar">
+                    <h4><i class="bi bi-journal-bookmark"></i> Resource Categories</h4>
+                    <p class="text-muted">Explore our collection of resources for new parents</p>
+                    
+                    <ul class="resources-list mt-4">
+                        <li class="active">
+                            <i class="bi bi-heart"></i> Postpartum Self-Care
+                        </li>
+                        <li>
+                            <i class="bi bi-people"></i> Support Groups
+                        </li>
+                        <li>
+                            <i class="bi bi-telephone"></i> Emergency Contacts
+                        </li>
+                        <li>
+                            <i class="bi bi-book"></i> Parenting Guides
+                        </li>
+                        <li>
+                            <i class="bi bi-shield-check"></i> Mental Health
+                        </li>
+                        <li>
+                            <i class="bi bi-nutrition"></i> Nutrition & Fitness
+                        </li>
+                    </ul>
+                    
+                    <div class="alert alert-custom mt-4">
+                        <h5><i class="bi bi-info-circle"></i> Need Help?</h5>
+                        <p class="mb-0">Our support team is available 24/7 to answer your questions.</p>
+                        <button class="btn btn-resource mt-3">Contact Support</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Resource Content -->
+            <div class="col-lg-8">
+                <!-- Self Care Card -->
+                <div class="resource-card card shadow">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="bi bi-journal-text"></i> Postpartum Self-Care Guide</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5><i class="bi bi-check-circle section-icon"></i> Daily Self-Care Practices</h5>
+                        <ul class="list-unstyled">
+                            <li class="practice-item">
+                                <i class="bi bi-arrow-right-circle text-primary"></i> 
+                                <div>
+                                    <strong>Take 10-minute breathing breaks</strong> throughout the day to reduce stress and center yourself.
+                                </div>
+                            </li>
+                            <li class="practice-item">
+                                <i class="bi bi-arrow-right-circle text-primary"></i> 
+                                <div>
+                                    <strong>Stay hydrated and eat nutritious meals</strong> - your body needs fuel for recovery and caring for your baby.
+                                </div>
+                            </li>
+                            <li class="practice-item">
+                                <i class="bi bi-arrow-right-circle text-primary"></i> 
+                                <div>
+                                    <strong>Get 15 minutes of sunlight daily</strong> to boost your mood and vitamin D levels.
+                                </div>
+                            </li>
+                            <li class="practice-item">
+                                <i class="bi bi-arrow-right-circle text-primary"></i> 
+                                <div>
+                                    <strong>Practice gentle stretching or walking</strong> to aid physical recovery and improve circulation.
+                                </div>
+                            </li>
+                            <li class="practice-item">
+                                <i class="bi bi-arrow-right-circle text-primary"></i> 
+                                <div>
+                                    <strong>Connect with other new parents</strong> to share experiences and reduce feelings of isolation.
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <h5 class="mt-5"><i class="bi bi-emoji-smile section-icon"></i> Mental Health Tips</h5>
+                        <ul class="list-unstyled">
+                            <li class="mental-health-item">
+                                <i class="bi bi-arrow-right-circle text-primary"></i> 
+                                <div>
+                                    <strong>Be kind to yourself</strong> - postpartum recovery takes time and every parent's journey is different.
+                                </div>
+                            </li>
+                            <li class="mental-health-item">
+                                <i class="bi bi-arrow-right-circle text-primary"></i> 
+                                <div>
+                                    <strong>Share your feelings</strong> with trusted people who can offer support and understanding.
+                                </div>
+                            </li>
+                            <li class="mental-health-item">
+                                <i class="bi bi-arrow-right-circle text-primary"></i> 
+                                <div>
+                                    <strong>Ask for help when you need it</strong> - whether with childcare, household tasks, or emotional support.
+                                </div>
+                            </li>
+                            <li class="mental-health-item">
+                                <i class="bi bi-arrow-right-circle text-primary"></i> 
+                                <div>
+                                    <strong>Remember that mood changes are common</strong> but persistent feelings of sadness or anxiety should be discussed with a healthcare provider.
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <div class="alert alert-custom mt-4" role="alert">
+                            <i class="bi bi-lightbulb"></i> <strong>Remember:</strong> If you're experiencing persistent sadness, anxiety, or difficulty coping, please reach out to a healthcare provider. Postpartum mood disorders are treatable with professional help.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Resources -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="resource-card card shadow">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="bi bi-people"></i> Support Groups</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Connect with other parents experiencing similar challenges and joys.</p>
+                                <ul>
+                                    <li>New Parents Meetup - Tuesdays at 10 AM</li>
+                                    <li>Postpartum Support International</li>
+                                    <li>Breastfeeding Support Group</li>
+                                </ul>
+                                <button class="btn btn-sm btn-resource">View Schedule</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="resource-card card shadow">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="bi bi-telephone"></i> Emergency Contacts</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Important numbers for immediate support:</p>
+                                <ul>
+                                    <li>Postpartum Support Hotline: 1-800-944-4773</li>
+                                    <li>National Suicide Prevention Lifeline: 988</li>
+                                    <li>Urgent Maternal Mental Health Hotline: 1-833-852-6262</li>
+                                </ul>
+                                <button class="btn btn-sm btn-resource">See All Contacts</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer text-center mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Maternal Wellness Guide</h5>
+                    <p>Supporting parents through the postpartum journey</p>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">Resources</a></li>
+                        <li><a href="#" class="text-white">Community Forum</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Get Help Now</h5>
+                    <p>Call our 24/7 support line: 1-800-123-4567</p>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.2);">
+            <p class="mb-0">© 2023 Maternal Wellness Guide. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

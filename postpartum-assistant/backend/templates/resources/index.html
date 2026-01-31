@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maternal Wellness Resources</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #8a6bc9;
+            --secondary-color: #5dbecd;
+            --accent-color: #ff7aa8;
+            --light-color: #f8f5fe;
+            --dark-color: #2d2856;
+        }
+        
+        body {
+            background-color: #f9f7ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark-color);
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6a48d7 100%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resource-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            background: white;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 14px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6a48d7 100%);
+            color: white;
+            padding: 18px 25px;
+            border-bottom: 0;
+        }
+        
+        .btn-resource {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-resource:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(106, 72, 215, 0.3);
+            color: white;
+        }
+        
+        .resource-link {
+            display: block;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            background: var(--light-color);
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .resource-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6a48d7 100%);
+            color: white;
+            padding: 25px 0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-heart-pulse-fill me-2"></i>Maternal Wellness Guide
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-house-door me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="bi bi-journal-bookmark me-1"></i> Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-chat-dots me-1"></i> Community</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-person-circle me-1"></i> My Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="mb-4">Maternal Wellness Resources</h1>
+                <p class="lead mb-5">Access our comprehensive collection of resources designed to support you through your postpartum journey.</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="resource-card card shadow text-center">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="bi bi-heart"></i> Self-Care</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Daily practices and mental health tips for postpartum recovery and wellness.</p>
+                        <a href="{{ url_for('self_care') }}" class="btn btn-resource mt-3">View Guide</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="resource-card card shadow text-center">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="bi bi-people"></i> Support Groups</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Connect with other parents and find community support groups in your area.</p>
+                        <a href="{{ url_for('support_groups') }}" class="btn btn-resource mt-3">Find Support</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="resource-card card shadow text-center">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="bi bi-telephone"></i> Emergency Contacts</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Immediate help resources for urgent maternal mental health needs.</p>
+                        <a href="{{ url_for('emergency_contacts') }}" class="btn btn-resource mt-3">Get Help</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-lg-8 mx-auto">
+                <div class="resource-card card shadow">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="bi bi-journal-bookmark"></i> Additional Resources</h4>
+                    </div>
+                    <div class="card-body">
+                        <a href="#" class="resource-link">
+                            <i class="bi bi-nutrition me-2"></i> Nutrition & Diet for Postpartum Recovery
+                        </a>
+                        <a href="#" class="resource-link">
+                            <i class="bi bi-book me-2"></i> Parenting Guides by Age
+                        </a>
+                        <a href="#" class="resource-link">
+                            <i class="bi bi-shield-check me-2"></i> Mental Health Resources
+                        </a>
+                        <a href="#" class="resource-link">
+                            <i class="bi bi-calendar-check me-2"></i> Wellness Check Schedule
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer text-center mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Maternal Wellness Guide</h5>
+                    <p>Supporting parents through the postpartum journey</p>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">Resources</a></li>
+                        <li><a href="#" class="text-white">Community Forum</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Get Help Now</h5>
+                    <p>Call our 24/7 support line: 1-800-123-4567</p>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.2);">
+            <p class="mb-0">© 2023 Maternal Wellness Guide. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
